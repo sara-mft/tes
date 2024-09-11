@@ -1,0 +1,80 @@
+# General settings
+general:
+  project_name: "TextIntentDetection"
+  log_level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  save_model_path: "models/"
+  data_path: "data/"
+
+# Data settings
+data:
+  train_file: "train_data.csv"
+  validation_file: "validation_data.csv"
+  test_file: "test_data.csv"
+  label_column: "intent"
+  text_column: "text"
+  test_split_ratio: 0.2
+
+# Model settings
+model:
+  type: "cross_encoder"  # options: dialogflow, azure_clu, cross_encoder, bi_encoder, classification, rasa
+  use_pretrained: True
+  pretrained_model_name: "bert-base-uncased"  # Only applicable if using open-source models
+
+# Training settings
+training:
+  batch_size: 32
+  learning_rate: 0.001
+  epochs: 10
+  optimizer: "adam"  # Options: adam, sgd, rmsprop
+  loss_function: "cross_entropy"  # Options: cross_entropy, mse
+
+# Evaluation settings
+evaluation:
+  metrics:  # List of evaluation metrics to use
+    - "accuracy"
+    - "f1_score"
+    - "precision"
+    - "recall"
+  save_results: True
+  results_path: "results/"
+
+# Dialogflow settings (for cloud-based NLP services)
+dialogflow:
+  project_id: "your-project-id"
+  session_id: "your-session-id"
+  language_code: "en-US"
+  credentials_path: "path/to/your/dialogflow/credentials.json"
+
+# Azure CLU settings
+azure_clu:
+  endpoint: "https://your-custom-subdomain.cognitiveservices.azure.com/"
+  api_key: "your-azure-api-key"
+  project_name: "your-azure-project-name"
+  deployment_name: "your-azure-deployment-name"
+
+# Open-source model settings
+open_source:
+  tokenizer_max_length: 128  # Maximum length for tokenization
+  max_seq_length: 128  # Maximum sequence length for the model
+  model_save_format: "pytorch"  # Options: pytorch, tensorflow
+
+# RASA settings
+rasa:
+  model_path: "path/to/rasa/model"
+  nlu_data_path: "path/to/nlu/data"
+
+# Bi-Encoder settings (specific to open-source)
+bi_encoder:
+  embedding_dimension: 768  # Dimension of the embeddings
+  use_faiss: True  # Use FAISS for fast retrieval
+  faiss_index_path: "faiss/index"  # Path to save/load FAISS index
+
+# Cross-Encoder settings (specific to open-source)
+cross_encoder:
+  pool_strategy: "mean"  # Options: mean, max, cls_token
+  use_gpu: True  # Whether to use GPU for inference
+
+# Miscellaneous settings
+misc:
+  random_seed: 42
+  verbose: True
